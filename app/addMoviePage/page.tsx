@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const AddMoviePage = () => {
+const AddMoviePage = () => {
     return (
         <main>AddMoviePage</main>
     )
 }
+
+export default AddMoviePage
