@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import AuthProvider from '@/components/authProvider/AuthProvider';
+import Navbar from '@/components/navbar/Navbar';
 
 export const metadata: Metadata = {
   title: 'Movies Hub',
@@ -22,6 +23,7 @@ export default function RootLayout({
         <UserProvider>
           <AuthProvider>
             {children}
+            <Navbar />
           </AuthProvider>
         </UserProvider>
       </body>
