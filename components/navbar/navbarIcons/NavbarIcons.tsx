@@ -18,28 +18,28 @@ const NavbarIcons = (props: Props) => {
     const pathname = usePathname();
     return (
         <div className={styles.iconContainer} key={index}>
-            <div className={styles.label}>
-                {index === 0 &&
-                    <Link href="/">
-                        <BiHomeAlt2 className={`${styles.icon} ${path === pathname ? styles.iconChecked : ""}`} />
-                    </Link>
-                }
-                {index === 1 &&
-                    <Link href="/addmovie">
-                        <MdLibraryAdd className={`${styles.icon} ${path === pathname ? styles.iconChecked : ""}`} />
-                    </Link>
-                }
-                {index === 2 &&
-                    <Link href="/profile">
-                        <RiAccountPinCircleLine className={`${styles.icon} ${path === pathname ? styles.iconChecked : ""}`} />
-                    </Link>
-                }
-                {index === 3 &&
-                    <Link href="/api/auth/logout">
-                        <BiLogOut className={styles.icon} />
-                    </Link>
-                }
-            </div>
+
+            {index === 0 &&
+                <Link href="/">
+                    <BiHomeAlt2 className={`${styles.icon} ${path === pathname ? styles.checked : ""}`} />
+                </Link>
+            }
+            {index === 1 &&
+                <Link href="/addmovie">
+                    <MdLibraryAdd className={`${styles.icon} ${path === pathname ? styles.checked : ""}`} />
+                </Link>
+            }
+            {index === 2 &&
+                <Link href="/profile">
+                    <RiAccountPinCircleLine className={`${styles.icon} ${path === pathname ? styles.checked : ""}`} />
+                </Link>
+            }
+            {index === 3 &&
+                <Link href="/api/auth/logout">
+                    <BiLogOut className={styles.icon} />
+                </Link>
+            }
+
         </div>
     )
 }
