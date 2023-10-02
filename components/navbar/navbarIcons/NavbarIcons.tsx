@@ -20,17 +20,17 @@ const NavbarIcons = (props: Props) => {
         <div className={styles.iconContainer} key={index}>
 
             {index === 0 &&
-                <Link href="/">
+                <Link href={path}>
                     <BiHomeAlt2 className={`${styles.icon} ${path === pathname ? styles.checked : ""}`} />
                 </Link>
             }
             {index === 1 &&
-                <Link href="/addmovie">
+                <Link href={path}>
                     <MdLibraryAdd className={`${styles.icon} ${path === pathname ? styles.checked : ""}`} />
                 </Link>
             }
             {index === 2 &&
-                <Link href="/profile">
+                <Link href={path}>
                     <RiAccountPinCircleLine className={`${styles.icon} ${path === pathname ? styles.checked : ""}`} />
                 </Link>
             }
