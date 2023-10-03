@@ -16,12 +16,17 @@ export const getAllUsers = async () => {
     const response = await fetch(`${API_URL}/users`, {
         method: "GET",
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token.accessToken}`
         }
     })
+    console.log(response.status);
     if (response.ok) {
         const data = await response.json();
         console.log(data);
-    } else console.log("Data not fetched");
+        return data
+    } else {
+        console.log("Data not fetched");
+        return undefined
+    }
     // console.log(data);
 }

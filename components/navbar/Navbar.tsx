@@ -14,6 +14,7 @@ const Navbar = (props: Props) => {
         <nav className={styles.container}>
             {navbarPaths.map((path, index) => (
                 <NavbarIcons
+                    key={index}
                     path={path}
                     index={index}
                 />
