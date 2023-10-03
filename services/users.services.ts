@@ -17,8 +17,7 @@ export const getAllUsers = async () => {
         method: "GET",
         headers: {
             Authorization: `Bearer ${token}`
-        },
-        next: { tags: ["users", "getAllUsers"] }
+        }
     })
     if (response.ok) {
         const data = await response.json();

@@ -8,7 +8,7 @@ export const GET = handleAuth({
     login: handleLogin({
         returnTo: "/",
         authorizationParams: {
-            audience: "http://localhost:8080", // or YOUR AUTH0_AUDIENCE
+            audience: "http://localhost:8080/", // or YOUR AUTH0_AUDIENCE
             // IS CRUCIAL FOR THE CORRECT FUNCTIONING OF THE AUTH0 TOKEN
         }
     })

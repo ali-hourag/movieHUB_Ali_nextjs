@@ -7,7 +7,8 @@ import { CLIENT_RENEG_LIMIT } from 'tls';
 
 const Home = async () => {
   const session = await getSession();
-  // const users = await getAllUsers();
+  const users = await getAllUsers();
+  console.log(users);
   // console.log(users);
   // console.log(session?.user);
   return (
