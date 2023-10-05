@@ -1,13 +1,11 @@
 "use client"
 import { createMovie } from '@/actions/movies.action';
-import { getAllGenres } from '@/services/genres.services';
 import { GenresType } from '@/types/genres';
-import { MoviesType } from '@/types/movies';
 import { UsersType } from '@/types/users';
-import { revalidateTag } from 'next/cache';
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
+import styles from './addMovieForm.module.css'
 
 type Props = {
     user: UsersType,
@@ -16,8 +14,8 @@ type Props = {
 
 const AddMovieForm = (props: Props) => {
     const { user, genres } = props;
-    // const [genres, setGenres] = useState<GenresType[]>([]);
     const [currentUser, setCurrentUser] = useState<UsersType | null>(null);
+    const [imagePreview, setImagePreview] = useState("https://res.cloudinary.com/dqdysl9ep/image/upload/v1696505520/movieHUB/Screenshot_2023-10-05_at_13.31.24_bs48sg.png")
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
         defaultValues: {
             name: "",
@@ -31,19 +29,13 @@ const AddMovieForm = (props: Props) => {
 
     const submitForm = () => {
 
-        //Upload image
         const name = watch("name")
         const year = parseInt(watch("year"))
         const score = parseInt(watch("score"))
         const genre = watch("genre")
-        // console.log(name);
-        // console.log(score);
-        // console.log(year);
-        // console.log(genre);
 
         const trackImgFileList = watch("image");
         const trackImgFile = trackImgFileList[0];
-        // console.log(trackImgFile);
         const movieFormData = new FormData();
         movieFormData.append("name", name)
         movieFormData.append("year", year.toString());
@@ -52,7 +44,6 @@ const AddMovieForm = (props: Props) => {
         movieFormData.append("image", trackImgFile);
 
         (async function fetchUpdates() {
-            //Coger user by Id and send id movie and genre and it will be created
             const userId = user.id;
             console.log(userId);
             if (userId) {
@@ -62,23 +53,31 @@ const AddMovieForm = (props: Props) => {
         }())
         toast.success('Successfully uploaded!')
     }
+    const handlePreview = () => {
+        const trackImgFileList = watch("image");
+        const trackImgFile = trackImgFileList[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+            setImagePreview(reader.result as string);
+        };
+        reader.readAsDataURL(trackImgFile as any);
+    }
     useEffect(() => {
         setCurrentUser(user);
     }, [])
     return (
-        <div>
+        <div className={styles.container}>
             <Toaster
                 position="top-center"
                 reverseOrder={false}
             />
-            <h3 className="addmovie-title">ADD MOVIE</h3>
-            <form className="addmovie-form" onSubmit={handleSubmit(submitForm)}>
-                <div className="addmovie-entry-container">
-                    <label htmlFor="addmovie-name" className="addmovie-name_label addmovie_label">
-                        Name:
+            <form className={styles.form} onSubmit={handleSubmit(submitForm)}>
+                <div className={styles.formEntry}>
+                    <label htmlFor="addmovie-name" className={styles.label}>
+                        NAME
                     </label>
                     <input id="addmovie-name"
-                        className="addmovie-name_input addmovie_input" type="text"
+                        className={styles.input} type="text"
                         {...register("name", {
                             required: {
                                 value: true,
@@ -96,12 +95,12 @@ const AddMovieForm = (props: Props) => {
                     />
                     {errors.name && <p className="addmovie-form-error">{errors.name.message}</p>}
                 </div>
-                <div className="addmovie-entry-container">
-                    <label htmlFor="addmovie-score" className="addmovie-score_label addmovie_label">
-                        Score:
+                <div className={styles.formEntry}>
+                    <label htmlFor="addmovie-score" className={styles.label}>
+                        SCORE
                     </label>
                     <input id="addmovie-score"
-                        className="addmovie-score_input addmovie_input"
+                        className={styles.input}
                         type="number" step="0.1" min="0" max="5"
                         {...register("score", {
                             required: {
@@ -113,12 +112,12 @@ const AddMovieForm = (props: Props) => {
                     {errors.score && <p className="addmovie-form-error">{errors.score.message}</p>}
 
                 </div>
-                <div className="addmovie-entry-container">
-                    <label htmlFor="addmovie-year" className="addmovie-year_label addmovie_label">
-                        Year:
+                <div className={styles.formEntry}>
+                    <label htmlFor="addmovie-year" className={styles.label}>
+                        YEAR
                     </label>
                     <input id="addmovie-year"
-                        className="addmovie-year_input addmovie_input"
+                        className={styles.input}
                         type="number" min="1895" max="2023"
                         {...register("year", {
                             required: {
@@ -130,11 +129,11 @@ const AddMovieForm = (props: Props) => {
                     {errors.year && <p className="addmovie-form-error">{errors.year.message}</p>}
 
                 </div>
-                <div className="addmovie-entry-container">
-                    <label htmlFor="addmovie-select-genre" className="addmovie-genre_label addmovie_label">
-                        Select a genre for your song
+                <div className={styles.formEntry}>
+                    <label htmlFor="addmovie-select-genre" className={styles.label}>
+                        GENRE
                     </label>
-                    <select className="addmovie-genre-select" id="addmovie-select-genre"
+                    <select className={styles.input} id="addmovie-select-genre"
                         {...register("genre", {
                             required: {
                                 value: true,
@@ -149,12 +148,13 @@ const AddMovieForm = (props: Props) => {
                     </select>
                     {errors.genre && <p className="addmovie-form-error">{errors.genre.message}</p>}
                 </div>
-                <div className="addmovie-entry-container">
-                    <label htmlFor="addmovie-image" className="addmovie-image_label addmovie_label">
-                        Select a cover:
-                    </label>
+                <div className={styles.formImg}>
+                    <div className={styles.imgContainer}>
+
+                        <img className={styles.currentImg} src={imagePreview} />
+                    </div>
                     <input id="addmovie-image"
-                        className="addmovie-image_input addmovie_input"
+                        className={styles.inputImg}
                         type="file"
                         accept="image/jpeg, image/jpg image/webp"
                         placeholder="Select an image cover..."
@@ -164,11 +164,18 @@ const AddMovieForm = (props: Props) => {
                                 message: "Image is required"
                             }
                         })}
+                        onChange={(e) => {
+                            register("image").onChange(e);
+                            handlePreview();
+                        }}
                     />
+                    <label htmlFor="addmovie-image" className={styles.labelImg}>
+                        SELECT A COVER
+                    </label>
                     {errors.image && <p className="addmovie-form-error">{errors.image.message}</p>}
                 </div>
-                <div className="addmovie-entry-container">
-                    <button className="add-movie-submit_btn" type="submit">Upload</button>
+                <div className={styles.formBtnContainer}>
+                    <button className={styles.uploadBtn} type="submit">Upload</button>
                 </div>
             </form>
         </div>
