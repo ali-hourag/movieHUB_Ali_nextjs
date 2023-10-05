@@ -34,7 +34,6 @@ const EditMovieForm = (props: Props) => {
         const year = parseInt(watch("year"))
         const score = parseInt(watch("score"))
         const genre = watch("genre");
-        console.log(genre);
         const trackImgFileList = watch("image");
         const trackImgFile = trackImgFileList[0];
         const movieFormData = new FormData();
@@ -46,10 +45,8 @@ const EditMovieForm = (props: Props) => {
 
         (async function fetchUpdates() {
             const userId = user.id;
-            console.log(userId);
             if (movie.id) {
                 const movieCreated = await updateMovie(movie.id.toString(), movieFormData)
-                console.log(movieCreated);
                 if (movieCreated === 201) {
                     toast.success("Successfully updated!")
                 }
@@ -68,7 +65,6 @@ const EditMovieForm = (props: Props) => {
             if (movie.id) {
                 const responseDeleteMovie = await deleteMovieById(movie.id.toString())
                 if (responseDeleteMovie) {
-                    console.log("a borrar");
                     setDeleting(true)
                     reset();
                     const loadingToast = toast.loading("Movie is being deleted...")

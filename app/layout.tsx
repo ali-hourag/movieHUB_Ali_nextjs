@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Movies Hub',
   description: 'Track your movies',
   icons: {
-    icon: "/public/assets/images/favicon.ico"
+    icon: "/assets/images/popcorn.png"
   }
 }
 

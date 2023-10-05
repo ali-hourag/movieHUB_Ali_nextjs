@@ -44,10 +44,8 @@ const AddMovieForm = (props: Props) => {
 
         (async function fetchUpdates() {
             const userId = user.id;
-            console.log(userId);
             if (userId) {
                 const movieCreated = await createMovie(movieFormData, userId)
-                console.log(movieCreated);
             }
         }())
         toast.success('Successfully uploaded!')

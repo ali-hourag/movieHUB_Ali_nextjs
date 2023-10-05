@@ -1,4 +1,4 @@
-import styles from './page.module.css'
+
 import { getSession } from '@auth0/nextjs-auth0'
 import { getAllUsers, getUserByEmail } from '@/services/users.services';
 import { UsersType } from '@/types/users';

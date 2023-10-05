@@ -3,13 +3,20 @@ import { getAllGenres } from '@/services/genres.services'
 import { getMovieById } from '@/services/movies.services'
 import { getUserByEmail } from '@/services/users.services'
 import { UsersType } from '@/types/users'
-import { getSession } from '@auth0/nextjs-auth0'
 import React from 'react'
+import { Metadata } from "next";
 
 type Props = {
     searchParams: {
         id: string,
         email: string
+    }
+}
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+    const movie = await getMovieById(searchParams.id);
+    return {
+        title: movie.name,
+        description: movie.name,
     }
 }
 
