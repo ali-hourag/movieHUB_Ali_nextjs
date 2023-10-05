@@ -8,8 +8,8 @@ export type MoviesType = {
     year: number,
     posterImage: string,
     score: number,
-    User: UsersType,
-    Genre: GenresType[],
+    user: UsersType,
+    genres: GenresType[],
     createdAt?: Date,
     updatedAt?: Date
 }

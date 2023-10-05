@@ -35,9 +35,9 @@ const NavbarIcons = (props: Props) => {
                 </Link>
             }
             {index === 3 &&
-                <Link href="/api/auth/logout">
+                <a href="/api/auth/logout">
                     <BiLogOut className={styles.icon} />
-                </Link>
+                </a>
             }
 
         </div>

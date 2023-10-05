@@ -3,7 +3,6 @@ import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
 
 
 const auth0Audience = process.env.AUTH0_AUDIENCE
-console.log("si" + auth0Audience);
 export const GET = handleAuth({
     login: handleLogin({
         returnTo: "/",

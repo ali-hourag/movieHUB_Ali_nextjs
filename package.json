@@ -11,7 +11,7 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.1.0",
     "@prisma/client": "^5.3.1",
-    "next": "latest",
+    "next": "^13.5.4",
     "prisma": "^5.3.1",
     "react": "latest",
     "react-dom": "latest"
@@ -22,5 +22,10 @@
     "@types/react-dom": "latest",
     "react-icons": "^4.11.0",
     "typescript": "latest"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }
