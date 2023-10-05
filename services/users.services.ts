@@ -8,7 +8,7 @@ export interface User {
     image: string
 }
 
-const API_URL = process.env.API_URL_BACKEND;
+const API_URL = process.env.NEXT_PUBLIC_API_URL_BACKEND;
 
 export const getAllUsers = async (): Promise<UsersType[]> => {
     const token = await getAccessToken()

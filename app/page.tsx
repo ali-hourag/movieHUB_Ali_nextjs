@@ -6,6 +6,7 @@ import MoviesList from '@/components/moviesList/MoviesList';
 import { createUser } from '@/actions/users.action';
 import { revalidateTag } from 'next/cache';
 import Link from 'next/link';
+import { getAllGenres } from '@/services/genres.services';
 
 
 const Home = async () => {
@@ -33,7 +34,6 @@ const Home = async () => {
     }
   }
   user = await getUserByEmail(session?.user.email) as UsersType;
-
   return (
     <main>
       <h1>{session?.user.name}'s movies</h1>
