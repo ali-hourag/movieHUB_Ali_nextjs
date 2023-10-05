@@ -36,7 +36,6 @@ const Home = async () => {
   user = await getUserByEmail(session?.user.email) as UsersType;
   return (
     <main>
-      <h1>{session?.user.name}'s movies</h1>
       <MoviesList user={user} />
     </main>
   )

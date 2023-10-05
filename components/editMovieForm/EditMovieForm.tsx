@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast, { Toaster } from 'react-hot-toast'
+import styles from './editMovieForm.module.css'
 
 type Props = {
     movie: MoviesType,
@@ -16,9 +17,9 @@ type Props = {
 
 const EditMovieForm = (props: Props) => {
     const { movie, genres, user } = props;
-    console.log(movie);
     const router = useRouter();
     const [deleting, setDeleting] = useState<boolean>(false)
+    const [imagePreview, setImagePreview] = useState(movie.posterImage)
     const { register, handleSubmit, formState: { errors }, watch, setValue, reset } = useForm({
         defaultValues: {
             name: "",
@@ -61,7 +62,6 @@ const EditMovieForm = (props: Props) => {
 
 
     const handleBackBtn = () => {
-
         router.back();
     }
 
@@ -84,6 +84,15 @@ const EditMovieForm = (props: Props) => {
 
         }())
     }
+    const handlePreview = () => {
+        const trackImgFileList = watch("image");
+        const trackImgFile = trackImgFileList[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+            setImagePreview(reader.result as string);
+        };
+        reader.readAsDataURL(trackImgFile as any);
+    }
 
     useEffect(() => {
         //meter imagen ya
@@ -95,7 +104,7 @@ const EditMovieForm = (props: Props) => {
     }, [])
 
     return (
-        <div>
+        <main className={styles.container}>
 
             <Toaster
                 position="top-center"
@@ -104,14 +113,14 @@ const EditMovieForm = (props: Props) => {
             {deleting ? <h1>Deleting...</h1>
                 :
                 <>
-                    <form className="addmovie-form" onSubmit={handleSubmit(submitForm)}>
-                        <div className="addmovie-entry-container">
-                            <label htmlFor="addmovie-name" className="addmovie-name_label addmovie_label">
-                                Name:
+                    <form className={styles.form} onSubmit={handleSubmit(submitForm)}>
+                        <div className={styles.formContainer}>
+                            <label htmlFor="addmovie-name" className={styles.label}>
+                                NAME
                             </label>
                             <input id="addmovie-name"
-
-                                className="addmovie-name_input addmovie_input" type="text"
+                                className={styles.input}
+                                type="text"
                                 {...register("name", {
                                     required: {
                                         value: true,
@@ -127,14 +136,14 @@ const EditMovieForm = (props: Props) => {
                                     }
                                 })}
                             />
-                            {errors.name && <p className="addmovie-form-error">{errors.name.message}</p>}
+                            {errors.name && <p className={styles.addMovieError}>{errors.name.message}</p>}
                         </div>
-                        <div className="addmovie-entry-container">
-                            <label htmlFor="addmovie-score" className="addmovie-score_label addmovie_label">
-                                Score:
+                        <div className={styles.formContainer}>
+                            <label htmlFor="addmovie-score" className={styles.label}>
+                                SCORE
                             </label>
                             <input id="addmovie-score"
-                                className="addmovie-score_input addmovie_input"
+                                className={styles.input}
                                 type="number" step="0.1" min="0" max="5"
                                 {...register("score", {
                                     required: {
@@ -143,16 +152,16 @@ const EditMovieForm = (props: Props) => {
                                     }
                                 })}
                             />
-                            {errors.score && <p className="addmovie-form-error">{errors.score.message}</p>}
+                            {errors.score && <p className={styles.addMovieError}>{errors.score.message}</p>}
 
                         </div>
-                        <div className="addmovie-entry-container">
-                            <label htmlFor="addmovie-year" className="addmovie-year_label addmovie_label">
-                                Year:
+                        <div className={styles.formContainer}>
+                            <label htmlFor="addmovie-year" className={styles.label}>
+                                YEAR
                             </label>
                             <input id="addmovie-year"
                                 value={movie?.year}
-                                className="addmovie-year_input addmovie_input"
+                                className={styles.input}
                                 type="number" min="1895" max="2023"
                                 {...register("year", {
                                     required: {
@@ -161,14 +170,15 @@ const EditMovieForm = (props: Props) => {
                                     }
                                 })}
                             />
-                            {errors.year && <p className="addmovie-form-error">{errors.year.message}</p>}
+                            {errors.year && <p className={styles.addMovieError}>{errors.year.message}</p>}
 
                         </div>
-                        <div className="addmovie-entry-container">
-                            <label htmlFor="addmovie-select-genre" className="addmovie-genre_label addmovie_label">
-                                Select a genre for your song
+                        <div className={styles.formContainer}>
+                            <label htmlFor="addmovie-select-genre" className={styles.label}>
+                                SELECT A GENRE
                             </label>
-                            <select className="addmovie-genre-select" id="addmovie-select-genre"
+                            <select id="addmovie-select-genre"
+                                className={styles.input}
                                 {...register("genre", {
                                     required: {
                                         value: true,
@@ -181,14 +191,15 @@ const EditMovieForm = (props: Props) => {
                                     <option value={genre.name} key={index}>{genre.name}</option>
                                 ))}
                             </select>
-                            {errors.genre && <p className="addmovie-form-error">{errors.genre.message}</p>}
+                            {errors.genre && <p className={styles.addMovieError}>{errors.genre.message}</p>}
                         </div>
-                        <div className="addmovie-entry-container-home">
-                            <label htmlFor="addmovie-image" className="addmovie-image_label addmovie_label">
-                                Select a cover:
-                            </label>
+                        <div className={styles.formContainerAddMovie}>
+                            <div className={styles.imgContainer}>
+
+                                <img className={styles.currentImg} src={imagePreview} />
+                            </div>
                             <input id="addmovie-image"
-                                className="addmovie-image_input addmovie_input"
+                                className={styles.inputImg}
                                 type="file"
                                 accept="image/jpeg, image/jpg image/webp"
                                 placeholder="Select an image cover..."
@@ -198,19 +209,27 @@ const EditMovieForm = (props: Props) => {
                                         message: "Image is required"
                                     }
                                 })}
+                                onChange={(e) => {
+                                    register("image").onChange(e);
+                                    handlePreview();
+                                }}
                             />
-                            <img className="movie-current_img" src={movie?.posterImage} />
-                            {errors.image && <p className="addmovie-form-error">{errors.image.message}</p>}
+                            <label htmlFor="addmovie-image" className={styles.labelImg}>
+                                SELECT A COVER
+                            </label>
+                            {errors.image && <p className={styles.addMovieError}>{errors.image.message}</p>}
                         </div>
-                        <div className="addmovie-entry-container edit-movie-btns">
-                            <button className="add-movie-submit_btn" type="submit">Upload</button>
-                            <button className="add-movie-submit_btn" onClick={() => removeMovie()}>REMOVE</button>
+                        <div className={`${styles.formContainerBtns} ${styles.btns}`}>
+                            <button className={styles.btn} type="submit">Upload</button>
+                            <button className={styles.btn} onClick={() => removeMovie()}>REMOVE</button>
                         </div>
                     </form>
-                    <button className="home-back_btn" onClick={handleBackBtn}>GO BACK</button>
+                    <div className={styles.backContainer}>
+                        <button className={styles.back} onClick={handleBackBtn}>GO BACK</button>
+                    </div>
                 </>
             }
-        </div>
+        </main>
     )
 }
 

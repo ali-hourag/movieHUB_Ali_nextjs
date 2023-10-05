@@ -1,0 +1,58 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100vw;
+    height: 80vh;
+    padding: 1rem;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.container::-webkit-scrollbar {
+    width: 0;
+}
+
+.cardmovie {
+    height: 20rem;
+    background-color: blueviolet;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.57);
+    color: antiquewhite;
+    top: 0;
+    right: 0;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+    padding: .4rem;
+    background: rgba(0, 0, 0, 0.57);
+    box-shadow: 5px -5px 12px 0px rgba(255, 255, 255, 0.05) inset, -5px 5px 12px 0px rgba(255, 255, 255, 0.05) inset,
+        4px 7px 15px 0px rgba(0, 0, 0, 0.08), -1px 0px 2px 0px rgba(201, 201, 201, 0.1) inset;
+    backdrop-filter: blur(6px);
+    color: white;
+}
+
+.detailsP {
+    font-size: .9rem;
+    margin: 0;
+}

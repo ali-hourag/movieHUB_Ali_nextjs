@@ -20,9 +20,9 @@ const Movie = async (props: Props) => {
     const genres = await getAllGenres();
     const user = await getUserByEmail(searchParams.email) as UsersType;
     return (
-        <div>
+        <>
             <EditMovieForm movie={movie} genres={genres} user={user} />
-        </div>
+        </>
     )
 }
 
