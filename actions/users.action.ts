@@ -20,10 +20,22 @@ export const createUser = async (newUser: UsersType): Promise<UsersType | null> 
     })
 
     if (response.ok) {
-        // revalidateTag("users")
-        // revalidateTag("getAllUsers")
+        revalidateTag("users")
+        revalidateTag("getAllUsers")
         const userCreated = await response.json() as UsersType;
         return userCreated
     }
     return null
+}
+
+export const deleteUserByEmail = async (userEmail: string): Promise<number> => {
+    console.log("llego a delete");
+    const token = await getAccessToken();
+    const response = await fetch(`${API_URL}/users/${userEmail}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token.accessToken}`
+        }
+    })
+    return response.status;
 }

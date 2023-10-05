@@ -5,8 +5,6 @@ import { UsersType } from '@/types/users';
 import MoviesList from '@/components/moviesList/MoviesList';
 import { createUser } from '@/actions/users.action';
 import { revalidateTag } from 'next/cache';
-import Link from 'next/link';
-import { getAllGenres } from '@/services/genres.services';
 
 
 const Home = async () => {
