@@ -24,7 +24,6 @@ export const getAllUsers = async (): Promise<UsersType[]> => {
 }
 
 export const getUserByEmail = async (email: string): Promise<UsersType> => {
-    console.log("email");
     const token = await getAccessToken()
     const response = await fetch(`${API_URL}/users/${email}`, {
         method: "GET",

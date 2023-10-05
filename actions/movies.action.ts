@@ -1,5 +1,4 @@
 "use server"
-import { MoviesType } from "@/types/movies";
 import { UsersType } from "@/types/users";
 import { getAccessToken } from "@auth0/nextjs-auth0";
 import { revalidateTag } from "next/cache";
@@ -7,7 +6,6 @@ import { revalidateTag } from "next/cache";
 const API_URL = process.env.NEXT_PUBLIC_API_URL_BACKEND;
 
 export const createMovie = async (formData: FormData, userId: number): Promise<UsersType | null> => {
-    console.log("llego a create movie");
     const token = await getAccessToken();
     const response = await fetch(`${API_URL}/movies/${userId.toString()}`, {
         method: "POST",
@@ -16,7 +14,6 @@ export const createMovie = async (formData: FormData, userId: number): Promise<U
         },
         body: formData
     })
-    console.log(response.status);
     if (response.ok) {
         const userCreated = await response.json() as UsersType;
         revalidateTag("getUserByEmail")

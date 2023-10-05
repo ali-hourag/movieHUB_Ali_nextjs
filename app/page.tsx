@@ -11,7 +11,6 @@ const Home = async () => {
   const session = await getSession();
   const users = await getAllUsers();
   let user: UsersType;
-  // console.log(users);
   let existent: boolean = false;
   if (users && session) {
     users.forEach((user: UsersType) => {

@@ -15,14 +15,11 @@ type Props = {
 
 const Movie = async (props: Props) => {
     const { searchParams } = props
-    const session = getSession()
     const movie = await getMovieById(searchParams.id);
     const genres = await getAllGenres();
     const user = await getUserByEmail(searchParams.email) as UsersType;
     return (
-        <>
-            <EditMovieForm movie={movie} genres={genres} user={user} />
-        </>
+        <EditMovieForm movie={movie} genres={genres} user={user} />
     )
 }
 

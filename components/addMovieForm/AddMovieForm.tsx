@@ -2,7 +2,7 @@
 import { createMovie } from '@/actions/movies.action';
 import { GenresType } from '@/types/genres';
 import { UsersType } from '@/types/users';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import styles from './addMovieForm.module.css'
@@ -14,7 +14,6 @@ type Props = {
 
 const AddMovieForm = (props: Props) => {
     const { user, genres } = props;
-    const [currentUser, setCurrentUser] = useState<UsersType | null>(null);
     const [imagePreview, setImagePreview] = useState("https://res.cloudinary.com/dqdysl9ep/image/upload/v1696505520/movieHUB/Screenshot_2023-10-05_at_13.31.24_bs48sg.png")
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
         defaultValues: {
@@ -62,9 +61,6 @@ const AddMovieForm = (props: Props) => {
         };
         reader.readAsDataURL(trackImgFile as any);
     }
-    useEffect(() => {
-        setCurrentUser(user);
-    }, [])
     return (
         <div className={styles.container}>
             <Toaster

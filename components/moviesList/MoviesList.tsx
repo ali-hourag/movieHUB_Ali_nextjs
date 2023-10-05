@@ -30,7 +30,6 @@ const MoviesList = (props: Props) => {
                         <p className={styles.detailsP}>Year: {movie.year}</p>
                         <p className={styles.detailsP}>Genre: {movie.genres && movie?.genres.map((genre) => genre.name)}</p>
                     </div>
-
                 </div>
             ))}
 

@@ -8,7 +8,6 @@ import { revalidateTag } from "next/cache";
 const API_URL = process.env.NEXT_PUBLIC_API_URL_BACKEND;
 
 export const createUser = async (newUser: UsersType): Promise<UsersType | null> => {
-    console.log("llego a create");
     const token = await getAccessToken();
     const response = await fetch(`${API_URL}/users`, {
         method: "POST",
@@ -29,7 +28,6 @@ export const createUser = async (newUser: UsersType): Promise<UsersType | null> 
 }
 
 export const deleteUserByEmail = async (userEmail: string): Promise<number> => {
-    console.log("llego a delete");
     const token = await getAccessToken();
     const response = await fetch(`${API_URL}/users/${userEmail}`, {
         method: "DELETE",

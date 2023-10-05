@@ -30,7 +30,6 @@ const EditMovieForm = (props: Props) => {
         }
     })
     const submitForm = () => {
-        // Upload image
         const name = watch("name")
         const year = parseInt(watch("year"))
         const score = parseInt(watch("score"))
@@ -46,7 +45,6 @@ const EditMovieForm = (props: Props) => {
         movieFormData.append("image", trackImgFile);
 
         (async function fetchUpdates() {
-            //Coger user by Id and send id movie and genre and it will be created
             const userId = user.id;
             console.log(userId);
             if (movie.id) {
@@ -95,7 +93,6 @@ const EditMovieForm = (props: Props) => {
     }
 
     useEffect(() => {
-        //meter imagen ya
         setValue("name", movie.name);
         setValue("score", movie.score.toString())
         setValue("genre", movie.genres[0].toString())
@@ -105,7 +102,6 @@ const EditMovieForm = (props: Props) => {
 
     return (
         <main className={styles.container}>
-
             <Toaster
                 position="top-center"
                 reverseOrder={false}
