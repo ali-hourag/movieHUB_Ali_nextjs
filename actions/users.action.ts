@@ -26,14 +26,3 @@ export const createUser = async (newUser: UsersType): Promise<UsersType | null> 
     }
     return null
 }
-
-export const deleteUserByEmail = async (userEmail: string): Promise<number> => {
-    const token = await getAccessToken();
-    const response = await fetch(`${API_URL}/users/${userEmail}`, {
-        method: "DELETE",
-        headers: {
-            Authorization: `Bearer ${token.accessToken}`
-        }
-    })
-    return response.status;
-}
