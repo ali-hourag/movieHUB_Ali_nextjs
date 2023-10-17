@@ -24,7 +24,8 @@ This project is refactored from <a href="https://github.com/ali-hourag/moviehub_
 * Connection to database.
 * Use of Auth0 for authentication.
 * Use of Cloudinary to upload images.
-
+<br/>
+<a href="https://drive.google.com/file/d/1oKxvcakuFfjaD6zO4os7z7TSeey3uNZG/view?usp=sharing">Click here to see a video demonstration!</a>
 
 ## Technologies
 - HTML
