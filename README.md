@@ -36,13 +36,7 @@ This project is refactored from <a href="https://github.com/ali-hourag/moviehub_
 
 
 ## Setup
-If you want run it directly from code do it by opening the project on Visual Studio Code and on terminal: npm run dev
-<br/>
-However, before that, the database should be running to ensure the correct use of the app. To run server:
-<br/>
-* Clone this <a href="https://github.com/ali-hourag/moviehub_ali">project</a> > on terminal: cd server > npm run dev
-<br /> That is the original React project, that is why the database is in there.
-<br/>
+Just give us a few days... it will be deployed asap!
 It is important to know that it is optimised for mobile devices, so it is recommended to open the inspector and select the mobile device!
 
 ## Get MOVIEHUB app and enjoy! 📱
